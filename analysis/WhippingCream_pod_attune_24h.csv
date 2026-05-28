@@ -1,6 +1,0 @@
-Product,Test,Threshold_log10,Isolate,Spike_level,N,X_test,POD_test,CI_test_lo,CI_test_hi,X_ref,POD_ref,CI_ref_lo,CI_ref_hi,dPOD,dPOD_lo,dPOD_hi,sig
-Whipping Cream,AttuneDilut_adj,3,Geobacillus,>10,16,16,1,0.79,1,16,1,0.79,1,0,-0.19,0.19,FALSE
-Whipping Cream,AttuneDilut_adj,3,Geobacillus,0-10,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE
-Whipping Cream,AttuneDilut_adj,3,Geobacillus,0,16,0,0,0,0.21,0,0,0,0.21,0,-0.19,0.19,FALSE
-Whipping Cream,AttuneDilut_adj,3,Anoxybacillus,>10,20,20,1,0.83,1,20,1,0.83,1,0,-0.16,0.16,FALSE
-Whipping Cream,AttuneDilut_adj,3,Anoxybacillus,0,16,0,0,0,0.21,0,0,0,0.21,0,-0.19,0.19,FALSE
