@@ -1,28 +1,29 @@
 Product,Test,Threshold_log10,Isolate,Spike_level,N,X_test,POD_test,CI_test_lo,CI_test_hi,X_ref,POD_ref,CI_ref_lo,CI_ref_hi,dPOD,dPOD_lo,dPOD_hi,sig
-UHT Milk,Charm_adj,1.6,Geobacillus,>10,13,13,1,0.75,1,13,1,0.75,1,0,-0.23,0.23,FALSE
-UHT Milk,Charm_adj,1.6,Geobacillus,0-10,7,0,0,0,0.41,0,0,0,0.41,0,-0.35,0.35,FALSE
-UHT Milk,Charm_adj,1.6,Geobacillus,0,16,0,0,0,0.21,0,0,0,0.21,0,-0.19,0.19,FALSE
-UHT Milk,Charm_adj,1.6,Anoxybacillus,>10,20,20,1,0.83,1,20,1,0.83,1,0,-0.16,0.16,FALSE
-UHT Milk,Charm_adj,1.6,Anoxybacillus,0,16,1,0.06,0,0.3,0,0,0,0.21,0.06,-0.14,0.28,FALSE
-Cream,Charm_adj,0.6,Geobacillus,>10,15,11,0.73,0.45,0.92,15,1,0.78,1,-0.27,-0.52,-0.01,TRUE
-Cream,Charm_adj,0.6,Geobacillus,0-10,5,2,0.4,0.05,0.85,0,0,0,0.52,0.4,-0.23,0.85,FALSE
-Cream,Charm_adj,0.6,Geobacillus,0,16,1,0.06,0,0.3,0,0,0,0.21,0.06,-0.14,0.28,FALSE
-Cream,Charm_adj,0.6,Anoxybacillus,>10,17,12,0.71,0.44,0.9,17,1,0.8,1,-0.29,-0.53,-0.05,TRUE
-Cream,Charm_adj,0.6,Anoxybacillus,0-10,3,1,0.33,0.01,0.91,0,0,0,0.71,0.33,-0.45,0.91,FALSE
-Cream,Charm_adj,0.6,Anoxybacillus,0,16,5,0.31,0.11,0.59,0,0,0,0.21,0.31,0.05,0.56,TRUE
-Whipping Cream,Charm_adj,0.9,Geobacillus,>10,16,16,1,0.79,1,16,1,0.79,1,0,-0.19,0.19,FALSE
-Whipping Cream,Charm_adj,0.9,Geobacillus,0-10,4,2,0.5,0.07,0.93,0,0,0,0.6,0.5,-0.24,0.93,FALSE
-Whipping Cream,Charm_adj,0.9,Geobacillus,0,16,0,0,0,0.21,0,0,0,0.21,0,-0.19,0.19,FALSE
-Whipping Cream,Charm_adj,0.9,Anoxybacillus,>10,20,19,0.95,0.75,1,20,1,0.83,1,-0.05,-0.24,0.12,FALSE
-Whipping Cream,Charm_adj,0.9,Anoxybacillus,0,16,1,0.06,0,0.3,0,0,0,0.21,0.06,-0.14,0.28,FALSE
-Med Beverage,Charm_adj,1.2,Geobacillus,>10,19,19,1,0.82,1,19,1,0.82,1,0,-0.17,0.17,FALSE
-Med Beverage,Charm_adj,1.2,Geobacillus,0-10,1,0,0,0,0.98,0,0,0,0.98,0,-0.98,0.98,FALSE
-Med Beverage,Charm_adj,1.2,Geobacillus,0,16,0,0,0,0.21,0,0,0,0.21,0,-0.19,0.19,FALSE
-Med Beverage,Charm_adj,1.2,Anoxybacillus,>10,20,12,0.6,0.36,0.81,20,1,0.83,1,-0.4,-0.61,-0.16,TRUE
-Med Beverage,Charm_adj,1.2,Anoxybacillus,0,16,2,0.12,0.02,0.38,0,0,0,0.21,0.12,-0.09,0.36,FALSE
-Chocolate,Charm_adj,1.3,Geobacillus,>10,20,20,1,0.83,1,20,1,0.83,1,0,-0.16,0.16,FALSE
-Chocolate,Charm_adj,1.3,Geobacillus,0,12,0,0,0,0.26,0,0,0,0.26,0,-0.24,0.24,FALSE
-Chocolate,Charm_adj,1.3,Anoxybacillus,>10,30,30,1,0.88,1,30,1,0.88,1,0,-0.11,0.11,FALSE
-Chocolate,Charm_adj,1.3,Anoxybacillus,0,18,0,0,0,0.19,0,0,0,0.19,0,-0.18,0.18,FALSE
-Chocolate,Charm_adj,1.3,B. licheniformis,>10,10,10,1,0.69,1,10,1,0.69,1,0,-0.28,0.28,FALSE
-Chocolate,Charm_adj,1.3,B. licheniformis,0,6,0,0,0,0.46,0,0,0,0.46,0,-0.39,0.39,FALSE
+UHT Milk,Charm_adj,1.6,Geobacillus,>10,5,5,1,0.48,1,5,1,0.48,1,0,-0.52,0.52,FALSE
+UHT Milk,Charm_adj,1.6,Geobacillus,0-10,15,8,0.53,0.27,0.79,8,0.53,0.27,0.79,0,-0.32,0.32,FALSE
+UHT Milk,Charm_adj,1.6,Geobacillus,=0,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE
+UHT Milk,Charm_adj,1.6,Anoxybacillus,0-10,20,20,1,0.83,1,20,1,0.83,1,0,-0.16,0.16,FALSE
+UHT Milk,Charm_adj,1.6,Anoxybacillus,=0,4,1,0.25,0.01,0.81,0,0,0,0.6,0.25,-0.4,0.81,FALSE
+Cream,Charm_adj,0.6,Geobacillus,>10,5,3,0.6,0.15,0.95,5,1,0.48,1,-0.4,-0.85,0.23,FALSE
+Cream,Charm_adj,0.6,Geobacillus,0-10,15,10,0.67,0.38,0.88,10,0.67,0.38,0.88,0,-0.31,0.31,FALSE
+Cream,Charm_adj,0.6,Geobacillus,=0,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE
+Cream,Charm_adj,0.6,Anoxybacillus,0-10,20,13,0.65,0.41,0.85,17,0.85,0.62,0.97,-0.2,-0.44,0.07,FALSE
+Cream,Charm_adj,0.6,Anoxybacillus,=0,4,1,0.25,0.01,0.81,0,0,0,0.6,0.25,-0.4,0.81,FALSE
+Whipping Cream,Charm_adj,0.9,Geobacillus,>10,5,5,1,0.48,1,5,1,0.48,1,0,-0.52,0.52,FALSE
+Whipping Cream,Charm_adj,0.9,Geobacillus,0-10,15,13,0.87,0.6,0.98,11,0.73,0.45,0.92,0.13,-0.16,0.4,FALSE
+Whipping Cream,Charm_adj,0.9,Geobacillus,=0,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE
+Whipping Cream,Charm_adj,0.9,Anoxybacillus,0-10,20,19,0.95,0.75,1,20,1,0.83,1,-0.05,-0.24,0.12,FALSE
+Whipping Cream,Charm_adj,0.9,Anoxybacillus,=0,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE
+Med Beverage,Charm_adj,1.2,Geobacillus,>10,5,5,1,0.48,1,5,1,0.48,1,0,-0.52,0.52,FALSE
+Med Beverage,Charm_adj,1.2,Geobacillus,0-10,15,14,0.93,0.68,1,14,0.93,0.68,1,0,-0.24,0.24,FALSE
+Med Beverage,Charm_adj,1.2,Geobacillus,=0,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE
+Med Beverage,Charm_adj,1.2,Anoxybacillus,0-10,20,12,0.6,0.36,0.81,20,1,0.83,1,-0.4,-0.61,-0.16,TRUE
+Med Beverage,Charm_adj,1.2,Anoxybacillus,=0,4,1,0.25,0.01,0.81,0,0,0,0.6,0.25,-0.4,0.81,FALSE
+Chocolate,Charm_adj,1.3,Geobacillus,>10,5,5,1,0.48,1,5,1,0.48,1,0,-0.52,0.52,FALSE
+Chocolate,Charm_adj,1.3,Geobacillus,0-10,15,15,1,0.78,1,15,1,0.78,1,0,-0.2,0.2,FALSE
+Chocolate,Charm_adj,1.3,Geobacillus,=0,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE
+Chocolate,Charm_adj,1.3,Anoxybacillus,>10,10,10,1,0.69,1,10,1,0.69,1,0,-0.28,0.28,FALSE
+Chocolate,Charm_adj,1.3,Anoxybacillus,0-10,20,20,1,0.83,1,20,1,0.83,1,0,-0.16,0.16,FALSE
+Chocolate,Charm_adj,1.3,Anoxybacillus,=0,6,0,0,0,0.46,0,0,0,0.46,0,-0.39,0.39,FALSE
+Chocolate,Charm_adj,1.3,B. licheniformis,0-10,10,10,1,0.69,1,10,1,0.69,1,0,-0.28,0.28,FALSE
+Chocolate,Charm_adj,1.3,B. licheniformis,=0,2,0,0,0,0.84,0,0,0,0.84,0,-0.84,0.84,FALSE
