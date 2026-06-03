@@ -1141,7 +1141,7 @@ compute_pod_table_24h <- function(inoculated_df, blanks_df, prod_name,
                                   test_col, log_thr) {
   time_val <- "24 Hours"
   
-  # --- Inoculated rows at 24h -------------------------------------------------
+  # Inoculated rows at 24h
   # spike_grp assigned from design table, NOT from observed PlatePos.
   inoc_24 <- inoculated_df |>
     dplyr::filter(Time == time_val) |>
@@ -1152,12 +1152,15 @@ compute_pod_table_24h <- function(inoculated_df, blanks_df, prod_name,
         log10s(.data[[test_col]]) > log_thr
     )
   
-  # --- Blank rows -------------------------------------------------------------
-  # Pool across all time-points; one row per Bact × Reps combination so that
-  # N_blank correctly reflects the number of distinct blank replicates
-  # (not inflated by time-point repetition).
+  # Blank rows
+  #  Blanks must be evaluated at the SAME time-point as inoculated rows (24h),
+  # both for X_test (signal threshold) and for N consistency.
+  # N_blank = one row per bacterium in the group at 24h
+  # (e.g. N=4 for Geobacillus in Milk: Geo 1, Geo 2, Geo 3, Geo 4 × 1 blank rep).
+  # Do NOT pool or deduplicate across time-points: distinct(Bact, Reps) keeps an
+  # arbitrary time-point's signal row, giving wrong X_test counts.
   bl <- blanks_df |>
-    dplyr::distinct(Bact, Reps, .keep_all = TRUE) |>
+    dplyr::filter(Time == time_val) |>
     dplyr::mutate(
       bact_grp  = bact_group(as.character(Bact)),
       spike_grp = "=0",
@@ -1168,7 +1171,7 @@ compute_pod_table_24h <- function(inoculated_df, blanks_df, prod_name,
   
   combined <- dplyr::bind_rows(inoc_24, bl)
   
-  # --- Counts -----------------------------------------------------------------
+  # Counts
   # X_ref  = number of replicates in that group with plate count > 10 at 24h.
   #          For ">10" bacteria this should approach N (all positive);
   #          for "0-10" bacteria some may be positive, some not.
@@ -1183,7 +1186,7 @@ compute_pod_table_24h <- function(inoculated_df, blanks_df, prod_name,
       .groups = "drop"
     )
   
-  # --- CI computation ---------------------------------------------------------
+  # CI computation
   # pmap_dfr avoids rowwise() list-column issues across dplyr versions.
   ci_rows <- pmap_dfr(counts, function(bact_grp, spike_grp, N, X_test, X_ref) {
     ct <- cp_ci(X_test, N)
