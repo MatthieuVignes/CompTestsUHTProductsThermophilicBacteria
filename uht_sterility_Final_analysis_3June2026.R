@@ -1378,6 +1378,42 @@ write_csv(bind_rows(all_pod_attune),
           "output/master_pod_attune_24h.csv")
 
 ##################################################
+# 6D — ADDITIONAL CHARM POD TABLES AT MANUFACTURER THRESHOLDS
+# Charm 150 RLU  (log10 = log10(150) ≈ 2.18, lower "suspect" boundary)
+# Charm 300 RLU  (log10 = log10(300) ≈ 2.48, upper "fail" / manufacturer threshold)
+# Same compute_pod_table_24h() function, only the threshold changes.
+##################################################
+
+CHARM_THR_150 <- log10(150)   # ≈ 2.176
+CHARM_THR_300 <- log10(300)   # ≈ 2.477
+
+all_pod_charm_150 <- list()
+all_pod_charm_300 <- list()
+
+for (prod_key in names(PRODUCTS)) {
+  prod_name <- PRODUCTS[[prod_key]]$name
+  df        <- filter(inoculated, Product == prod_name)
+  df_blanks <- filter(blanks,     Product == prod_name)
+  
+  pod_150 <- compute_pod_table_24h(df, df_blanks, prod_name,
+                                   "Charm_adj", CHARM_THR_150)
+  pod_300 <- compute_pod_table_24h(df, df_blanks, prod_name,
+                                   "Charm_adj", CHARM_THR_300)
+  
+  all_pod_charm_150[[prod_key]] <- pod_150
+  all_pod_charm_300[[prod_key]] <- pod_300
+  
+  write_csv(pod_150, file.path("output",
+                               paste0(prod_key, "_pod_charm_150RLU_24h.csv")))
+  write_csv(pod_300, file.path("output",
+                               paste0(prod_key, "_pod_charm_300RLU_24h.csv")))
+  cat("  Charm 150/300 RLU POD CSVs written for", prod_name, "\n")
+}
+
+write_csv(bind_rows(all_pod_charm_150), "output/master_pod_charm_150RLU_24h.csv")
+write_csv(bind_rows(all_pod_charm_300), "output/master_pod_charm_300RLU_24h.csv")
+
+##################################################
 # SECTION 7 — COMBINED OUTPUTS ACROSS ALL PRODUCTS
 ##################################################
 
