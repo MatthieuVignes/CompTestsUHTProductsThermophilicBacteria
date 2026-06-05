@@ -1,0 +1,6 @@
+Product,Test,Threshold_log10,Isolate,Spike_level,N,X_test,POD_test,CI_test_lo,CI_test_hi,X_ref,POD_ref,CI_ref_lo,CI_ref_hi,dPOD,dPOD_lo,dPOD_hi,sig
+Cream,Charm_adj,2.4771212547196626,Geobacillus,>10,5,0,0,0,0.52,5,1,0.48,1,-1,-1,-0.26,TRUE
+Cream,Charm_adj,2.4771212547196626,Geobacillus,0-10,15,0,0,0,0.22,10,0.67,0.38,0.88,-0.67,-0.85,-0.34,TRUE
+Cream,Charm_adj,2.4771212547196626,Geobacillus,=0,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE
+Cream,Charm_adj,2.4771212547196626,Anoxybacillus,0-10,20,0,0,0,0.17,17,0.85,0.62,0.97,-0.85,-0.95,-0.58,TRUE
+Cream,Charm_adj,2.4771212547196626,Anoxybacillus,=0,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE
