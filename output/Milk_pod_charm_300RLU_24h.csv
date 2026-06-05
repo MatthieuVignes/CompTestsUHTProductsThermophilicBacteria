@@ -1,0 +1,6 @@
+Product,Test,Threshold_log10,Isolate,Spike_level,N,X_test,POD_test,CI_test_lo,CI_test_hi,X_ref,POD_ref,CI_ref_lo,CI_ref_hi,dPOD,dPOD_lo,dPOD_hi,sig
+UHT Milk,Charm_adj,2.4771212547196626,Geobacillus,>10,5,5,1,0.48,1,5,1,0.48,1,0,-0.52,0.52,FALSE
+UHT Milk,Charm_adj,2.4771212547196626,Geobacillus,0-10,15,8,0.53,0.27,0.79,8,0.53,0.27,0.79,0,-0.32,0.32,FALSE
+UHT Milk,Charm_adj,2.4771212547196626,Geobacillus,=0,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE
+UHT Milk,Charm_adj,2.4771212547196626,Anoxybacillus,0-10,20,20,1,0.83,1,20,1,0.83,1,0,-0.16,0.16,FALSE
+UHT Milk,Charm_adj,2.4771212547196626,Anoxybacillus,=0,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE

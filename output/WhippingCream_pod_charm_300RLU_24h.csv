@@ -1,0 +1,6 @@
+Product,Test,Threshold_log10,Isolate,Spike_level,N,X_test,POD_test,CI_test_lo,CI_test_hi,X_ref,POD_ref,CI_ref_lo,CI_ref_hi,dPOD,dPOD_lo,dPOD_hi,sig
+Whipping Cream,Charm_adj,2.4771212547196626,Geobacillus,>10,5,4,0.8,0.28,0.99,5,1,0.48,1,-0.2,-0.72,0.36,FALSE
+Whipping Cream,Charm_adj,2.4771212547196626,Geobacillus,0-10,15,4,0.27,0.08,0.55,11,0.73,0.45,0.92,-0.47,-0.69,-0.11,TRUE
+Whipping Cream,Charm_adj,2.4771212547196626,Geobacillus,=0,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE
+Whipping Cream,Charm_adj,2.4771212547196626,Anoxybacillus,0-10,20,0,0,0,0.17,20,1,0.83,1,-1,-1,-0.77,TRUE
+Whipping Cream,Charm_adj,2.4771212547196626,Anoxybacillus,=0,4,0,0,0,0.6,0,0,0,0.6,0,-0.6,0.6,FALSE
