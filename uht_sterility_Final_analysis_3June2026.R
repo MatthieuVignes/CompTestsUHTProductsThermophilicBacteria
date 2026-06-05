@@ -21,7 +21,7 @@ setwd("~/Documents/Work-notMassey/FONTERRA/Sterility_Testing_Julie/") # enter yo
 dir.create("output", showWarnings = FALSE)
 
 ##################################################
-# SECTION 1 — CONSTANTS & HELPERS
+# SECTION 1 - CONSTANTS & HELPERS
 ##################################################
 PLATE_POS   <- 10    # CFU/mL: plate count > 10 is considered positive
 PLATE_CENS  <- 300   # values above this are TNTC; plotted as ">300", stored as 305
@@ -97,7 +97,7 @@ metrics <- function(TP, FP, FN, TN) {
 }
 
 ##################################################
-# SECTION 2 — DATA LOADING
+# SECTION 2 - DATA LOADING
 ##################################################
 # File paths and official product names
 PRODUCTS <- list(
@@ -166,7 +166,7 @@ cat("Data loaded:\n")
 inoculated |> count(Product, Time)
 
 ##################################################
-# SECTION 3 — PLOT FUNCTIONS
+# SECTION 3 - PLOT FUNCTIONS
 ##################################################
 # Colour map for time-points
 time_pal <- c("6 Hours"  = "#1B9E77",
@@ -197,7 +197,7 @@ plot_plate <- function(df, prod_name) {
       labels = c("0","50","100","150","200","250","300",">300")
     ) +
     scale_colour_manual(values = BACT_COLS, drop = TRUE) +
-    labs(title = paste(prod_name, "— Plate Count"),
+    labs(title = paste(prod_name, "- Plate Count"),
          x = "Time (h)", y = "Plate Count (CFU/mL)", colour = "Bacteria") +
     theme_bw(base_size = 10) +
     theme(legend.position = "right")
@@ -220,7 +220,7 @@ plot_signal <- function(df, test_col, ylabel, hlines = NULL, hline_labels = NULL
     scale_x_continuous(breaks = time_breaks,
                        labels = paste0(time_breaks, "h")) +
     scale_colour_manual(values = BACT_COLS, drop = TRUE) +
-    labs(title = paste(prod_name, "—", ylabel),
+    labs(title = paste(prod_name, "-", ylabel),
          x = "Time (h)", y = paste0("log10(", ylabel, ")"), colour = "Bacteria") +
     theme_bw(base_size = 10) +
     theme(legend.position = "right")
@@ -302,7 +302,7 @@ plot_accuracy_curves <- function(sweep_df, time_val, prod_name, test_label) {
 # 3E: Mean Sensitivity & Specificity vs threshold
 # For time-points where all samples are plate-positive, Specificity is
 # NA for every threshold and every bacterium. mean(NA, na.rm=TRUE) = NaN,
-# which ggplot silently plots as 0 — a misleading flat line. We keep the
+# which ggplot silently plots as 0 - a misleading flat line. We keep the
 # Sensitivity line for such time-points (it is valid) but suppress the
 # Specificity line and flag the time-point in the subtitle.
 plot_mean_sensspe <- function(sweep_df, prod_name, test_label) {
@@ -339,7 +339,7 @@ plot_mean_sensspe <- function(sweep_df, prod_name, test_label) {
     scale_colour_manual(values = time_pal, drop = TRUE) +
     scale_linetype_manual(values = c(Sensitivity = "solid", Specificity = "dashed")) +
     scale_y_continuous(limits = c(0, 1), labels = percent_format(1)) +
-    labs(title    = paste(prod_name, "—", test_label,
+    labs(title    = paste(prod_name, "-", test_label,
                           "mean Sensitivity & Specificity"),
          subtitle = subtitle_txt,
          x        = "Threshold (log10)",
@@ -396,16 +396,16 @@ plot_mean_roc <- function(sweep_df, prod_name, test_label) {
     scale_colour_manual(values = time_pal, drop = TRUE) +
     scale_x_continuous(labels = percent_format(1), limits = c(0, 1)) +
     scale_y_continuous(labels = percent_format(1), limits = c(0, 1)) +
-    labs(title    = paste(prod_name, "—", test_label, "mean ROC"),
+    labs(title    = paste(prod_name, "-", test_label, "mean ROC"),
          subtitle = subtitle_txt,
-         x        = "1 − Specificity (FPR)",
+         x        = "1 - Specificity (FPR)",
          y        = "Sensitivity (TPR)",
          colour   = "Time") +
     theme_bw(base_size = 10)
 }
 
 ##################################################
-# SECTION 4 — THRESHOLD SWEEP ANALYSIS
+# SECTION 4 - THRESHOLD SWEEP ANALYSIS
 ##################################################
 # Build a grid of thresholds for a given test column (log10 scale)
 make_thres_grid <- function(df, col, step = 0.1) {
@@ -469,17 +469,17 @@ run_sweep <- function(df, test_col, blanks_df = NULL) {
 }
 
 ##################################################
-# SECTION 5 — TWO-STAGE THRESHOLD SELECTION
+# SECTION 5 - TWO-STAGE THRESHOLD SELECTION
 ##################################################
 # NOTE: not what is exactly used in the paper, see method description. Was used as a guide. 
 # Youden, "best" Sensitivity=1 and above balk/bg threshold was explored
-# Stage 1 — Hard background floor
+# Stage 1 - Hard background floor
 #   Only thresholds strictly above bg$hi (mean + BG_N_SD*sd of blanks on
 #   log10 scale) are considered. This eliminates thresholds that cannot
 #   distinguish signal from instrument noise, regardless of classification
 #   performance.
 #
-# Stage 2 — Three nested optima within the above-floor candidates
+# Stage 2 - Three nested optima within the above-floor candidates
 #   (a) Youden's J = Sensitivity + Specificity - 1  (balanced optimum,
 #       standard in diagnostic test literature, Youden 1950)
 #   (b) Sensitivity-first range: all thresholds achieving the highest
@@ -491,7 +491,7 @@ run_sweep <- function(df, test_col, blanks_df = NULL) {
 #   the range.
 ##################################################
 # intersection of per-bacteria ranges
-# per_bact : data frame with (Time, Bact, lower, upper, achieved) — one row
+# per_bact : data frame with (Time, Bact, lower, upper, achieved) - one row
 #            per bacterium per time-point, produced by youden_optimum() or
 #            sensitivity_first(). Contains only bacteria that survived the
 #            Sensitivity filter (i.e. had at least one plate-positive replicate
@@ -522,14 +522,14 @@ intersect_ranges <- function(per_bact, bact_counts) {
       # Bacteria that reached this function (survived Sensitivity filter
       # and had at least one above-floor threshold)
       n_above_floor  = n(),
-      # Bacteria with no valid individual range (lower is NA — optimisation
+      # Bacteria with no valid individual range (lower is NA - optimisation
       # found no threshold meeting the criterion for this bacterium)
       no_range        = {
         b <- Bact[is.na(lower)]
         if (length(b)) paste(b, collapse = ", ") else NA_character_
       },
       # Bacteria whose individual range exists but does not overlap the
-      # common intersection — they are the binding constraint
+      # common intersection - they are the binding constraint
       problematic     = {
         lo_valid <- as.numeric(lower[!is.na(lower)])
         hi_valid <- as.numeric(upper[!is.na(upper)])
@@ -577,7 +577,7 @@ intersect_ranges <- function(per_bact, bact_counts) {
 # Rows with NA log10_thresh are dropped; NaN is treated as NA.
 apply_bg_floor <- function(sweep_df, bg_hi) {
   if (is.null(bg_hi) || is.na(bg_hi) || is.nan(bg_hi)) {
-    warning("Background upper limit is NA/NaN — floor not applied.")
+    warning("Background upper limit is NA/NaN - floor not applied.")
     return(sweep_df)
   }
   sweep_df |> filter(!is.na(log10_thresh), log10_thresh > bg_hi)
@@ -760,7 +760,7 @@ summarise_best <- function(sweep_df, prod_name, test_label, bg_hi) {
       criterion_value = round(as.numeric(criterion_value), 4),
       Range_log10     = fmt_range(common_lower, common_upper, valid, above_floor),
       Range_units     = case_when(
-        !valid | is.na(common_lower) ~ "—",
+        !valid | is.na(common_lower) ~ "-",
         common_lower == common_upper ~
           formatC(10^common_lower, format = "e", digits = 1),
         TRUE ~ paste0(formatC(10^common_lower, format = "e", digits = 1),
@@ -775,7 +775,7 @@ summarise_best <- function(sweep_df, prod_name, test_label, bg_hi) {
 }
 
 ##################################################
-# SECTION 6 — MAIN LOOP OVER ALL PRODUCTS
+# SECTION 6 - MAIN LOOP OVER ALL PRODUCTS
 ##################################################
 
 all_sweep_charm   <- list()
@@ -1011,7 +1011,7 @@ for (prod_key in names(PRODUCTS)) {
 }
 
 ##################################################
-# 6B2 — CHARM VS PLATE COUNT WITH MANUAL THRESHOLD
+# 6B2 - CHARM VS PLATE COUNT WITH MANUAL THRESHOLD
 # Same per-bacteria boxplot as _04_charm_vs_plate.pdf but with the
 # manually chosen log10 threshold overlaid as a horizontal dashed line.
 ##################################################
@@ -1079,7 +1079,7 @@ for (prod_key in names(PRODUCTS)) {
 #   "0-10" : bacteria inoculated at 0–10 CFU/mL  (fractional positives)
 #   "=0"   : blank replicates (never inoculated; PlatePos always 0)
 #
-# Design table — which bacteria were inoculated at ">10" per product:
+# Design table - which bacteria were inoculated at ">10" per product:
 #   UHT Milk       : Geo 1 only
 #   Cream          : Geo 3 only
 #   Whipping Cream : Geo 1 only
@@ -1120,7 +1120,7 @@ cp_ci <- function(x, n, conf = 0.95) {
 
 # dPOD CI: Newcombe (N>5) or Wehling-Wilson propagation (N<=5)
 dpod_ci <- function(x1, n1, x2, n2, conf = 0.95) {
-  # Always return a plain named numeric(3) — no nested names, no attributes.
+  # Always return a plain named numeric(3) - no nested names, no attributes.
   # as.numeric() strips names from cp_ci() sub-results so arithmetic never
   # produces a named intermediate that breaks c(dPOD=, lo=, hi=) assembly.
   if (n1 == 0 || n2 == 0)
@@ -1335,17 +1335,17 @@ plot_fig1_style <- function(df_inoc, bact_name, prod_name,
               colour = "#377EB8", alpha = 0.25, linewidth = 0.4) +
     geom_line(aes(y = log_attune * scale_fac, group = Reps),
               colour = "#E41A1C", alpha = 0.25, linewidth = 0.4) +
-    # Plate count (left axis) — black
+    # Plate count (left axis) - black
     geom_jitter(aes(y = PlotPlate, shape = "Plate count"),
                 width = jit_width, size = 2, colour = "black", alpha = 0.80) +
     geom_hline(yintercept = PLATE_POS, linetype = "dotted",
                colour = "black", linewidth = 0.7) +
-    # Charm (right axis, scaled) — blue
+    # Charm (right axis, scaled) - blue
     geom_jitter(aes(y = log_charm * scale_fac, shape = "ATP Bioluminescence"),
                 width = jit_width, size = 2, colour = "#377EB8", alpha = 0.80) +
     geom_hline(yintercept = thr_charm_log10 * scale_fac,
                linetype = "dotted", colour = "#377EB8", linewidth = 0.7) +
-    # Attune (right axis, scaled) — red
+    # Attune (right axis, scaled) - red
     geom_jitter(aes(y = log_attune * scale_fac, shape = "Flow Cytometry"),
                 width = jit_width, size = 2, colour = "#E41A1C", alpha = 0.80) +
     geom_hline(yintercept = thr_attune_log10 * scale_fac,
@@ -1368,7 +1368,7 @@ plot_fig1_style <- function(df_inoc, bact_name, prod_name,
     scale_shape_manual(values = c("Plate count" = 16,
                                   "ATP Bioluminescence" = 17,
                                   "Flow Cytometry" = 15)) +
-    labs(title  = paste0(prod_name, " — ", bact_name),
+    labs(title  = paste0(prod_name, " - ", bact_name),
          x      = "Pre-incubation time (h)",
          shape  = NULL) +
     theme_bw(base_size = 10) +
@@ -1437,7 +1437,7 @@ write_csv(bind_rows(all_pod_attune),
           "output/master_pod_attune_24h.csv")
 
 ##################################################
-# 6D — ADDITIONAL CHARM POD TABLES AT MANUFACTURER THRESHOLDS
+# 6D - ADDITIONAL CHARM POD TABLES AT MANUFACTURER THRESHOLDS
 # Charm 150 RLU  (log10 = log10(150) ≈ 2.18, lower "suspect" boundary)
 # Charm 300 RLU  (log10 = log10(300) ≈ 2.48, upper "fail" / manufacturer threshold)
 # Same compute_pod_table_24h() function, only the threshold changes.
@@ -1473,7 +1473,7 @@ write_csv(bind_rows(all_pod_charm_150), "output/master_pod_charm_150RLU_24h.csv"
 write_csv(bind_rows(all_pod_charm_300), "output/master_pod_charm_300RLU_24h.csv")
 
 ##################################################
-# SECTION 7 — COMBINED OUTPUTS ACROSS ALL PRODUCTS
+# SECTION 7 - COMBINED OUTPUTS ACROSS ALL PRODUCTS
 ##################################################
 
 # 7.1 Write master best-threshold table
