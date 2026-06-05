@@ -956,7 +956,7 @@ for (prod_key in names(PRODUCTS)) {
 # Thresholds are on the log10 scale, chosen manually after inspecting the
 # sweep outputs. Each product gets two PDFs: one for Charm, one for Attune.
 # The manufacturer reference line (300 RLU) is also shown on Charm plots.
-# The background noise band (mean ± BG_N_SD SD of blanks) is shown on both.
+# The background noise band (mean +/- BG_N_SD SD of blanks) is shown on both.
 
 # Named vectors indexed by prod_key for easy lookup inside the loop
 MANUAL_THRESH <- list(
@@ -1357,7 +1357,7 @@ plot_fig1_style <- function(df_inoc, bact_name, prod_name,
     scale_y_continuous(
       name   = "Plate count (CFU/mL)",
       breaks = seq(0, plate_max, 50),
-      labels = c(seq(0, 250, 50), "≥300"),
+      labels = c(seq(0, 250, 50), ">=300"),
       limits = c(0, plate_max),
       sec.axis = sec_axis(
         transform = ~ . / scale_fac,
@@ -1438,13 +1438,13 @@ write_csv(bind_rows(all_pod_attune),
 
 ##################################################
 # 6D - ADDITIONAL CHARM POD TABLES AT MANUFACTURER THRESHOLDS
-# Charm 150 RLU  (log10 = log10(150) ≈ 2.18, lower "suspect" boundary)
-# Charm 300 RLU  (log10 = log10(300) ≈ 2.48, upper "fail" / manufacturer threshold)
+# Charm 150 RLU  (log10 = log10(150) ~= 2.18, lower "suspect" boundary)
+# Charm 300 RLU  (log10 = log10(300) ~= 2.48, upper "fail" / manufacturer threshold)
 # Same compute_pod_table_24h() function, only the threshold changes.
 ##################################################
 
-CHARM_THR_150 <- log10(150)   # ≈ 2.176
-CHARM_THR_300 <- log10(300)   # ≈ 2.477
+CHARM_THR_150 <- log10(150)
+CHARM_THR_300 <- log10(300)
 
 all_pod_charm_150 <- list()
 all_pod_charm_300 <- list()
