@@ -261,7 +261,7 @@ plot_vs_plate <- function(df, test_col, ylabel, prod_name) {
       # only one plate-count class is present (e.g. Chocolate, all positive).
       PlateGrp = factor(PlatePos,
                         levels = c(0L, 1L),
-                        labels = c("Plate \u226410", "Plate >10"))
+                        labels = c("Plate >= 10", "Plate >10"))
     ) |>
     filter(!is.na(log_val)) |>
     ggplot(aes(x = TimeNum, y = log_val, fill = PlateGrp, colour = PlateGrp,
@@ -275,7 +275,7 @@ plot_vs_plate <- function(df, test_col, ylabel, prod_name) {
     ) +
     scale_fill_manual(values  = c("steelblue","tomato")) +
     scale_colour_manual(values = c("steelblue","tomato")) +
-    labs(title  = paste(prod_name, "—", ylabel, "vs Plate Count"),
+    labs(title  = paste(prod_name, "-", ylabel, "vs Plate Count"),
          x = "Time (h)", y = paste0("log10(", ylabel, ")"),
          fill = "Plate count", colour = "Plate count") +
     theme_bw(base_size = 9) +
@@ -1010,6 +1010,65 @@ for (prod_key in names(PRODUCTS)) {
   cat("  Manual-threshold plots written for", prod_name, "\n")
 }
 
+##################################################
+# 6B2 — CHARM VS PLATE COUNT WITH MANUAL THRESHOLD
+# Same per-bacteria boxplot as _04_charm_vs_plate.pdf but with the
+# manually chosen log10 threshold overlaid as a horizontal dashed line.
+##################################################
+
+# for Charm
+for (prod_key in names(PRODUCTS)) {
+  prod_name <- PRODUCTS[[prod_key]]$name
+  df        <- filter(inoculated, Product == prod_name)
+  thr_ch    <- MANUAL_THRESH$charm[prod_key]
+  
+  # Build the standard vs-plate plot then add the threshold line
+  p <- plot_vs_plate(df, "Charm_adj", "Charm (RLU/test)", prod_name) +
+    geom_hline(yintercept = thr_ch,
+               linetype   = "dashed",
+               colour     = "black",
+               linewidth  = 0.7) +
+    annotate("text",
+             x     = max(sort(unique(df$TimeNum))),
+             y     = thr_ch,
+             label = sprintf("threshold log10=%.1f", thr_ch),
+             hjust = 1, vjust = -0.4,
+             colour = "black", size = 2.5)
+  
+  pdf(file.path("output",
+                paste0(prod_key, "_15_charm_vs_plate_threshold.pdf")),
+      width = 11, height = 7)
+  print(p)
+  dev.off()
+}
+
+# for Attune Dilut
+for (prod_key in names(PRODUCTS)) {
+  prod_name <- PRODUCTS[[prod_key]]$name
+  df        <- filter(inoculated, Product == prod_name)
+  thr_ch    <- MANUAL_THRESH$attune[prod_key]
+  
+  # Build the standard vs-plate plot then add the threshold line
+  p <- plot_vs_plate(df, "AttuneDilut_adj", "Attune Diluted (AFU/mL)", prod_name) +
+    geom_hline(yintercept = thr_ch,
+               linetype   = "dashed",
+               colour     = "black",
+               linewidth  = 0.7) +
+    annotate("text",
+             x     = max(sort(unique(df$TimeNum))),
+             y     = thr_ch,
+             label = sprintf("threshold log10=%.1f", thr_ch),
+             hjust = 1, vjust = -0.4,
+             colour = "black", size = 2.5)
+  
+  pdf(file.path("output",
+                paste0(prod_key, "_16_attune_vs_plate_threshold.pdf")),
+      width = 11, height = 7)
+  print(p)
+  dev.off()
+}
+
+##################################################
 # 6C - POD ANALYSIS (Probability of Detection) and Add-on plot with three-test together
 # Structure mirrors AOAC PTM Table 4 / document Tables 1-2:
 #   Each row = one product × bacteria-group × spike-level combination at 24h.
