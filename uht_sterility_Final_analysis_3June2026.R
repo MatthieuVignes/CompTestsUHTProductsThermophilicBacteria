@@ -261,7 +261,7 @@ plot_vs_plate <- function(df, test_col, ylabel, prod_name) {
       # only one plate-count class is present (e.g. Chocolate, all positive).
       PlateGrp = factor(PlatePos,
                         levels = c(0L, 1L),
-                        labels = c("Plate >= 10", "Plate >10"))
+                        labels = c("Plate ≤ 10", "Plate > 10"))
     ) |>
     filter(!is.na(log_val)) |>
     ggplot(aes(x = TimeNum, y = log_val, fill = PlateGrp, colour = PlateGrp,
@@ -273,8 +273,10 @@ plot_vs_plate <- function(df, test_col, ylabel, prod_name) {
       breaks = sort(unique(df$TimeNum)),
       labels = paste0(sort(unique(df$TimeNum)), "h")
     ) +
-    scale_fill_manual(values  = c("steelblue","tomato")) +
-    scale_colour_manual(values = c("steelblue","tomato")) +
+    scale_fill_manual(values  = c("Plate ≤ 10" = "tomato",
+                                  "Plate > 10"     = "steelblue")) +
+    scale_colour_manual(values = c("Plate ≤ 10" = "tomato",
+                                   "Plate > 10"     = "steelblue")) +
     labs(title  = paste(prod_name, "-", ylabel, "vs Plate Count"),
          x = "Time (h)", y = paste0("log10(", ylabel, ")"),
          fill = "Plate count", colour = "Plate count") +
